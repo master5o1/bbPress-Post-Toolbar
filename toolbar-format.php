@@ -180,13 +180,9 @@ STYLE;
 						 'panel' => 'color',
 						 'data' => bbp_5o1_toolbar_format::color_formatting());
 		$items[] = array( 'action' => 'switch_panel',
-						 'inside_anchor' => '<img src="' . plugins_url( '/images/font.png', __FILE__ ) . '" title="Size" alt="Size" />',
+						 'inside_anchor' => '<img src="' . plugins_url( '/images/font.png', __FILE__ ) . '" title="Font Size & Face" alt="Font Size & Face" />',
 						 'panel' => 'size',
 						 'data' => bbp_5o1_toolbar_format::size_formatting());
-		$items[] = array( 'action' => 'switch_panel',
-						 'inside_anchor' => '<img src="' . plugins_url( '/images/font.png', __FILE__ ) . '" title="Font Face" alt="Font" />',
-						 'panel' => 'font',
-						 'data' => bbp_5o1_toolbar_format::font_formatting());
 		$items[] = array( 'action' => 'switch_panel',
 						 'inside_anchor' => '<img src="' . plugins_url( '/images/link.png', __FILE__ ) . '" title="Link" alt="Link" />',
 						 'panel' => 'links',
@@ -197,24 +193,7 @@ STYLE;
 <a class="toolbar-apply" style="margin-top: 1.4em;" onclick="insert_panel(\'link\');">Apply Link</a>');
 		return $items;
 	}
-	
-	function font_formatting() {
-		$fonts[] = "Arial";
-		$fonts[] = "'Comic Sans MS'";
-		$fonts[] = "Courier";
-		$fonts[] = "Georgia";
-		$fonts[] = "Helvetica";
-		$fonts[] = "'Times New Roman'";
-		$fonts[] = "Ubuntu";
-		$fonts[] = "Verdana";
-
-		$html = '';
-		foreach ($fonts as $font) {
-			$html .= '<a title="' . $font . '" onclick="insert_font(\'' . addslashes($font) . '\');" style="cursor: pointer; display: inline-block; margin:0 0.5em;font-family:' . $font . '; font-size: 1.4em;">' . $font . '</a> ';
-		}
-		return '<div style="text-align: center;">' . $html . '</div>';
-	}
-	
+		
 	function colors() {
 		$colors[] = 'Red';
 		$colors[] = 'Green';
@@ -269,7 +248,22 @@ STYLE;
 		foreach ($sizes as $size) {
 			$html .= '<a class="size" onclick="insert_size(\'' . $size . '\');" style="font-size:' . $size . ';">' . $size . '</a>';
 		}
-		return '<div style="line-height: 50px;text-align:center;">' . $html . '</div>';
+		
+		$html .= '<br /><br />';
+		
+		$fonts[] = "Arial";
+		$fonts[] = "'Comic Sans MS'";
+		$fonts[] = "Courier";
+		$fonts[] = "Georgia";
+		$fonts[] = "Helvetica";
+		$fonts[] = "'Times New Roman'";
+		$fonts[] = "Ubuntu";
+		$fonts[] = "Verdana";
+		
+		foreach ($fonts as $font) {
+			$html .= '<a title="' . $font . '" onclick="insert_font(\'' . addslashes($font) . '\');" style="cursor: pointer; display: inline-block; margin:0 0.5em;font-family:' . $font . '; font-size: 1.4em;">' . $font . '</a> ';
+		}
+		return '<div style="text-align: center;">' . $html . '</div>';
 	}
 	
 }
