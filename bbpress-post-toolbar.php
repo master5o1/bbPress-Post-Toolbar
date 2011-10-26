@@ -3,7 +3,7 @@
  Plugin Name: bbPress Post Toolbar
  Plugin URI: http://wordpress.org/extend/plugins/bbpress-post-toolbar/
  Description: A toolbar for bbPress that can be extended by other plugins.
- Version: 0.6.1
+ Version: 0.6.5
  Author: Jason Schwarzenberger
  Author URI: http://master5o1.com/
 */
@@ -34,7 +34,7 @@ add_action( 'wp_footer' , array('bbp_5o1_toolbar', 'post_form_toolbar_footer_scr
 add_action( 'bbp_init' , array('bbp_5o1_toolbar', 'script_and_style') );
 if ( !get_option( 'bbp_5o1_toolbar_manual_insertion' ) ) {
 	/*
-	The foloowing add_actions are pairs related to `reply` and `topic`.
+	The following add_actions are pairs related to `reply` and `topic`.
 	Comment out one pair before uncommenting the next.
 	As you can see, the // is the comment marker.
 	
@@ -90,6 +90,13 @@ register_activation_hook(__FILE__, array('bbp_5o1_toolbar', 'plugin_activation')
 register_deactivation_hook(__FILE__, array('bbp_5o1_toolbar', 'plugin_deactivation') );
 
 load_plugin_textdomain('bbp_5o1_toolbar', false, basename( dirname( __FILE__ ) ) . '/languages' );
+
+add_filter('query_vars',array('bbp_5o1_toolbar','css_trigger'));
+add_action('template_redirect', array('bbp_5o1_toolbar','css_trigger_check'));
+
+add_filter( 'bbp_5o1_toolbar_add_items' , array('bbp_5o1_toolbar', 'button_ordering'), 999);
+add_action( 'admin_init' , array('bbp_5o1_toolbar', 'button_ordering_script') );
+add_action( 'admin_head' , array('bbp_5o1_toolbar', 'button_ordering_style') );
 
 // Plugin class:
 class bbp_5o1_toolbar {
@@ -184,6 +191,9 @@ class bbp_5o1_toolbar {
 				<h3><?php _e('Options', 'bbp_5o1_toolbar'); ?></h3>
 				<form method="post" action="">
 					<p>
+					<?php bbp_5o1_toolbar::button_ordering_admin(); ?>
+					</p>
+					<p>
 						<strong><?php _e('Show video panel?', 'bbp_5o1_toolbar'); ?></strong><br /><br />
 						<span style="margin: 0 50px;">
 						<label style="display: inline-block; width: 150px;"><input name="bbp_5o1_toolbar_use_youtube" type="radio" value="1" <?php print (($use_youtube) ? 'checked="checked"' : '' ) ?> /> <?php _e('Yes (default)', 'bbp_5o1_toolbar'); ?></label>
@@ -265,6 +275,13 @@ class bbp_5o1_toolbar {
 					</div>
 					<?php endif; ?>
 					<p>
+						<strong><?php _e('Customised toolbar styling (CSS)'); ?></strong></br /><br />
+						<textarea name="bbp_5o1_toolbar_custom_css" style="margin: 0 50px; min-height: 100px; min-width: 400px;"><?php echo get_option('bbp_5o1_toolbar_custom_css'); ?></textarea>
+						<div style="margin: 0 50px;">
+							<small><?php printf( __('Clear the text area to revert to the default css (%s).', 'bbp_5o1_toolbar'), '<a href="' . plugins_url('/includes/toolbar.css', __file__) . '">toolbar.css</a>' ); ?></small>
+						</div>
+					</p>
+					<p>
 						<strong><?php _e('Customised help panel message.'); ?></strong></br /><br />
 						<textarea name="bbp_5o1_toolbar_custom_help" style="margin: 0 50px; min-height: 100px; min-width: 400px;"><?php echo get_option('bbp_5o1_toolbar_custom_help'); ?></textarea>
 						<div style="margin: 0 50px;">
@@ -305,6 +322,9 @@ class bbp_5o1_toolbar {
 			return;
 		if (isset($_POST['bbpress-post-toolbar']) && $_POST['bbpress-post-toolbar'] == "bbpress-post-toolbar") {
 
+			update_option('bbp_5o1_toolbar_sort_order', $_POST['bbp_5o1_toolbar_sort_order']);
+			
+			
 			// Components:
 			if ($_POST['bbp_5o1_toolbar_use_youtube'] == 1)
 				update_option('bbp_5o1_toolbar_use_youtube', true);
@@ -348,6 +368,7 @@ class bbp_5o1_toolbar {
 				update_option('bbp_5o1_toolbar_show_credit', false);
 			
 			update_option('bbp_5o1_toolbar_custom_help', $_POST['bbp_5o1_toolbar_custom_help']);
+			update_option('bbp_5o1_toolbar_custom_css', $_POST['bbp_5o1_toolbar_custom_css']);
 			
 			if ($_POST['bbp_5o1_toolbar_manual_insertion'] == 1)
 				update_option('bbp_5o1_toolbar_manual_insertion', true);
@@ -394,7 +415,6 @@ class bbp_5o1_toolbar {
 					endif;
 					$i++;
 				endforeach;
-				// 
 			  ?><?php
 			?></ul>
 			<?php
@@ -441,12 +461,127 @@ class bbp_5o1_toolbar {
 
 	function script_and_style() {
 		wp_register_script( 'bbp_5o1_post_toolbar_script', plugins_url('includes/toolbar.js', __FILE__) );
-		wp_register_style( 'bbp_5o1_post_toolbar_style', plugins_url('includes/toolbar.css', __FILE__) );
+		//wp_register_style( 'bbp_5o1_post_toolbar_style', plugins_url('includes/toolbar.css', __FILE__) );
+		wp_register_style( 'bbp_5o1_post_toolbar_style', site_url('/?bbp_5o1_toolbar_css') );
 		
 		wp_enqueue_script( 'bbp_5o1_post_toolbar_script' );
 		wp_enqueue_style( 'bbp_5o1_post_toolbar_style' );
 	}
 	
+	function css_trigger($vars) {
+		$vars[] = 'bbp_5o1_toolbar_css';
+		return $vars;
+	}
+	
+	function css_trigger_check() {
+		if ( !isset($_GET['bbp_5o1_toolbar_css']) ) { return; }
+		header("Content-Type: text/css");
+		if ( ! get_option('bbp_5o1_toolbar_custom_css') ) {
+			echo "/* begin default CSS: */\n"; 
+			echo file_get_contents( dirname(__FILE__) . '/includes/toolbar.css' );
+			echo "\n";
+			echo "/* end default CSS: */\n";
+		} else {
+			echo "/* begin custom CSS: */\n"; 
+			echo get_option('bbp_5o1_toolbar_custom_css');
+			echo "\n";
+			echo "/* end custom CSS: */\n";
+		}
+		echo "\n\n";
+		echo "/* begin toolbar buttons/extensions CSS: */\n";
+		do_action( 'bbp_5o1_toolbar_css' );
+		echo "\n";
+		echo "/* end toolbar buttons/extensions CSS: */\n";
+		exit;
+	}
+	
+	function button_ordering( $items ) {
+		if ( ! get_option( 'bbp_5o1_toolbar_sort_order' ) )
+			return $items;
+		$order_str = trim(get_option( 'bbp_5o1_toolbar_sort_order' ), ' ,');
+		$sort_order = explode(',', $order_str);
+
+		$items_hashes = array_flip($sort_order);
+
+		foreach ($items_hashes as $hash => $item) {
+			if ($hash != md5('')) {
+				$new_items[$hash] = -1;
+			}
+		}
+		
+		foreach ($items as $item) {
+			$hash = md5( $item['action'] . $item['inside_anchor'] );
+			if ($hash != md5('')) {
+				$new_items[$hash] = $item;
+			}
+		}
+		
+		$items = array();
+		$hashes = '';
+		foreach ($new_items as $hash => $item) {
+			//$hash = md5( $item['action'] . $item['inside_anchor'] );
+			if ($hash != md5('')) {
+				$hashes .= $hash . ',';
+				$items[] = $item;
+			}
+		}
+		update_option('bbp_5o1_toolbar_sort_order', trim($hashes, ' ,'));
+		
+		return $items;
+	}
+	
+	function button_ordering_style() {
+		echo <<<HTML
+<style type="text/css">
+	#sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; background-color: #eaeaea; border: solid 1px #e5e5e5;}
+	#sortable li { cursor: pointer; margin: 4px; vertical-align: middle; padding: 2px 3px; width: 20px; height: 20px; display: inline-block; background-color: #f5f5f5; border: solid 1px #bbb; }
+</style>
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+		jQuery( "#sortable" ).sortable({
+			stop: function(event, ui) {
+				document.getElementById('sort-order-hashes').value = '';
+				for (i = 0; i < jQuery('#sortable').sortable('toArray').length; i++) {
+					document.getElementById('sort-order-hashes').value += jQuery('#sortable').sortable('toArray')[i];
+					if (i < jQuery('#sortable').sortable('toArray').length-1) {
+						document.getElementById('sort-order-hashes').value += ',';
+					}
+				}
+			}
+		});
+		jQuery( "#sortable" ).disableSelection();
+	});
+</script>
+HTML;
+	}
+	
+	function button_ordering_script() {
+			wp_enqueue_script( 'jquery' );
+			wp_enqueue_script( 'jquery-ui-sortable' );
+			wp_enqueue_script( 'jquery-ui-draggable' );
+	}
+
+	function button_ordering_admin() {
+		$items = apply_filters( 'bbp_5o1_toolbar_add_items' , array() );
+		if (count($items) == 0) {
+			return;
+		}
+		echo '<strong>' . __('Button ordering', 'bbp_5o1_toolbar') . '</strong> (drag n drop)' . "\n";
+		?>
+		<div style="margin: 0"><small><?php _e('Note: This is probably buggy on several cases.', 'bbp_5o1_toolbar'); ?></small></div>
+		<?php
+		echo '<ul id="sortable">';
+		$hashes = '';
+		foreach ($items as $item) {
+			$hash = md5( $item['action'] . $item['inside_anchor']);
+			$hashes .= $hash . ',';
+			echo '<li id="' . $hash . '" class="ui-state-default">' . $item['inside_anchor'] . '</li>';
+		}
+		
+		echo '</ul>' . "\n";
+		echo '<input type="hidden" name="bbp_5o1_toolbar_sort_order" id="sort-order-hashes" value="' . trim($hashes, ' ,') . '" />' . "\n";
+		echo '<input type="submit" onclick="document.getElementById(\'sort-order-hashes\').value=\'\';" value="Reset custom ordering" />' . "\n";
+	}
 }
 
 // Extend kses to allow <span>

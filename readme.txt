@@ -4,7 +4,7 @@ Donate link: http://master5o1.com/donate/
 Tags: bbPress, bbPress 2.0, toolbar, youtube, images, smilies, smileys, emoticons, 5o1
 Requires at least: WordPress 3.1+ and bbPress 2.0+
 Tested up to: 3.2.1
-Stable tag: 0.6.1
+Stable tag: 0.6.5
 
 Post toolbar for bbPress 2.0.
 
@@ -20,6 +20,8 @@ Post toolbar for bbPress 2.0.
 * Also provides a [youtube]http://...[/youtube] shortcode.
 * Toolbar items all pluggable, defaults can be turned off and replaced by custom ones.
 * Default item set is formatting, smilies, and videos.
+* Custom CSS styling of the bar.
+* Custom button ordering.
 
 I would like to use my [website](http://master5o1.com/) for more direct 
 support, feedback, bug reports and feature requests.  Any donations will 
@@ -64,6 +66,11 @@ I recommend that this folder is either copied or moved to the `/wp-content/` dir
 1. Image panel part of the toolbar options.
 
 == Changelog ==
+
+= 0.6.5 =
+
+* Built custom CSS ability.  Uses the default toolbar.css if there is not custom CSS available.  Custom CSS replaces toolbar.css and is run before the default/extended button css.
+* Custom button ordering.  Drag and drop using jQuery's Sortable.
 
 = 0.6.1 =
 
@@ -187,11 +194,8 @@ Added translation .pot file so that people can have custom translations.
 
 == To Do ==
 
-* Make a list.
 * Go to sleep.
-* Allow customisable, savable CSS.
-* Attempt customisable button ordering.
-* Get this onto github.
+* Clean some things.
 * Other things that I can't figure out yet.
 * Relax and have a cup of hot chocolate.
 
