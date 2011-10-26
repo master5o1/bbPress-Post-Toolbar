@@ -1,0 +1,147 @@
+/* CSS for bbPress-post-toolbar plugin to WordPress. */
+
+#post-toolbar {
+	margin: auto auto 5px;
+	clear: both;
+}
+
+#post-toolbar #buttons {
+	line-height: 22px;
+	list-style-type: none;
+	background: #f9f9f9;
+	border: solid 1px #efefef;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	padding: 0 0;
+	margin: auto 0 auto;
+}
+
+#post-toolbar #buttons li {
+	display: inline-block;
+	min-width: 24px;
+	text-align: center;
+	border-top: none;
+	border-right: solid 1px #efefef;
+	border-bottom: solid 1px #efefef;
+	border-left: none;
+	margin-bottom: -1px;
+}
+
+#post-toolbar #buttons li.right-button {
+	border-right: none;
+	border-left: solid 1px #efefef;
+	margin-left: -1px;
+	float: right;
+	min-width: 24px;
+}
+
+#post-toolbar #buttons li:hover {
+	background-color: #efefef;
+}
+
+#post-toolbar #buttons li a {
+	width: 100%;
+	height: 24px;
+	display: inline-block;
+	color: inherit;
+	vertical-align: middle;
+	padding: none;
+}
+
+#post-toolbar #buttons li a:hover {
+	color: inherit;
+	cursor: pointer;
+}
+
+#post-toolbar #buttons li a img {
+	height: 16px;
+	width: 16px;
+	padding: 4px;
+	vertical-align: middle;
+	padding: none;
+	margin: none;
+	border: none;
+}
+
+#post-toolbar .panel {
+	display: none;
+	padding: 5px;
+	min-height: 50px;
+	margin: 0 10px 5px;
+	background: #fcfcfc;
+	border: solid 1px #efefef;
+	border-top: none;
+	border-radius: 0 0 3px 3px;
+	-moz-border-radius: 0 0 3px 3px;
+	-webkit-border-radius: 0 0 3px 3px;
+}
+
+#post-toolbar .panel .size {
+	cursor: pointer;
+	margin: auto 5px;
+}
+
+#post-toolbar .panel .size:hover {
+	text-decoration: underline;
+}
+
+#post-toolbar .panel .smiley {
+	border: none;
+	display: inline-block;
+	margin: 1px 3px 4px;
+	padding: 1px 3px 2px;
+	cursor: pointer;
+}
+
+#post-toolbar .panel .smiley:hover {
+	border: none;
+	border-bottom: solid 3px #888;
+	margin-bottom: 1px;
+}
+
+#post-toolbar .panel .smiley img {
+	border: none;
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+}
+
+#post-toolbar .panel .toolbar-apply {
+	display: inline-block;
+	margin: auto 10px;
+	padding: 2px 5px;
+	min-width: 100px;
+	text-align: center;
+	border: solid 1px #e5e5e5;
+	background: #ffffff;
+	cursor: pointer;
+    display:inline-block;
+    width: auto;
+	padding: 7px 5px;
+	text-align:center;    
+    background:#880000;
+	border-bottom:1px solid #ddd;color:#fff;
+}
+
+#post-toolbar .panel .toolbar-apply:hover {
+	background:#cc0000;
+}
+
+#post-toolbar .panel .color-choice,
+#post-toolbar .panel .color-choice-no {
+	height:50px;
+	display:inline-block;
+	cursor:pointer;
+	border:none;
+}
+
+#post-toolbar .panel .color-chooser {
+	border:solid 1px #888;
+	width:auto;
+	overflow:hidden;
+	height: 50px;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+ }
