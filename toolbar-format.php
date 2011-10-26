@@ -32,7 +32,10 @@ class bbp_5o1_toolbar_format {
 		extract(shortcode_atts(array(
 			'title' => 'arbitrary',
 		), $atts));
+		$title = trim( $title );
+		if ( empty($title) ) $title = 'arbitrary';
 		$content = trim( $content );
+		if ( empty($content) ) return '&#91;code' . (($title == 'arbitrary')?'':' title="' . $title . '"') . '&#93;';
 		$count = substr_count( $content, "\n" );
 		$numbers = '';
 		for ($i = 0; $i <= $count; $i++) {
@@ -46,6 +49,8 @@ class bbp_5o1_toolbar_format {
 		if (is_bbpress()) {
 			$magic_code_shortcode_content_array[md5($content)] = $content;
 			$content = md5($content);
+		} else {
+			return '<pre>' . $content . '</pre>';
 		}
 		if ( $count == 0 ) {
 			return '<span class="code-inline">' . $content . '</span>';
@@ -173,7 +178,7 @@ STYLE;
 						  'data' => "function(stack){insertHTML(stack, 'blockquote', []);}");
 		$items[] = array( 'action' => 'api_item',
 						  'inside_anchor' => '<img src="' . plugins_url( '/images/code.png', __FILE__ ) . '" title="Code" alt="Code" />',
-						  'data' => "function(stack){insertHTML(stack, 'code', []);}");
+						  'data' => "function(stack){insertShortcode(stack, 'code', [['title','']]);}");
 		$items[] = array( 'action' => 'switch_panel',
 						 'inside_anchor' => '<img src="' . plugins_url( '/images/fontcolor.png', __FILE__ ) . '" title="Color" alt="Color" />',
 						 'panel' => 'color',

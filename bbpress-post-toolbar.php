@@ -33,7 +33,7 @@ add_action( 'wp_footer' , array('bbp_5o1_toolbar', 'post_form_toolbar_footer_scr
 // bbPress 2.0 Actions & Filters:
 add_action( 'bbp_init' , array('bbp_5o1_toolbar', 'script_and_style') );
 if ( !get_option( 'bbp_5o1_toolbar_manual_insertion' ) ) {
-	$bbp_5o1_toolbar_hook_to_use = 0; // Possible values are: 0, 1, 2, 3.
+	$bbp_5o1_toolbar_hook_to_use = 1; // Possible values are: 0, 1, 2, 3.
 	switch ($bbp_5o1_toolbar_hook_to_use) {
 		case 0:
 			// This is the best case at the moment because of the default theme avatar placement.
@@ -67,7 +67,6 @@ if ( !get_option( 'bbp_5o1_toolbar_manual_insertion' ) ) {
 // Components:
 if ( get_option( 'bbp_5o1_toolbar_use_formatting' ) )
 	require_once( dirname(__FILE__) . '/toolbar-format.php' );
-	// require_once( dirname(__FILE__) . '/toolbar-formatting.php' ); // old
 if ( get_option( 'bbp_5o1_toolbar_use_youtube' ) )
 	require_once( dirname(__FILE__) . '/toolbar-video-panel.php' );
 if ( get_option( 'bbp_5o1_toolbar_use_smilies' ) )
