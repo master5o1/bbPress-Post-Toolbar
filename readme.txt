@@ -67,6 +67,12 @@ I recommend that this folder is either copied or moved to the `/wp-content/` dir
 
 == Changelog ==
 
+= 0.7.1 =
+
+* Allowed for duplicate smiley codes but not so that each duplicate code has its own entry on the panel. [feature request](http://master5o1.com/topic/id-like-to-submit-a-feature/)
+* Example: :) and (: both translate to smile.png but smile.png only has one entry on the toolbar smilies panel.
+* Fixed minor bug in video panel where 'Online Video Url::' had two colons.
+
 = 0.7.0 =
 
 * Made images be anchored to their image file also.  As requested in [this topic](http://master5o1.com/topic/image-hyperlinks/) on my forum.
