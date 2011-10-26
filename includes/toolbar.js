@@ -107,7 +107,7 @@ function insert_panel(tag) {
 	} else if (tag == 'image') {
 		image_title = document.getElementById('image_title');
 		image_url = document.getElementById('image_url');
-		link = '<img src="' + image_url.value + '" alt="' + image_title.value + '" /'+'>';
+		link = '<a href="' + image_url.value + '"><img src="' + image_url.value + '" alt="' + image_title.value + '" /'+'></a>';
 		post_form.value += " " + link + " ";
 		image_url.value = "";
 		image_title.value = "";

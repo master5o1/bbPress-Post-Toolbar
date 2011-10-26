@@ -118,7 +118,7 @@ class bbp_5o1_images_panel {
 					if (responseJSON.success != true) return
 					post_form = document.getElementById('bbp_reply_content');
 					if (post_form==null) post_form = document.getElementById('bbp_topic_content');
-					post_form.value += ' <img src="' + responseJSON.file + '" alt="" /> '
+					post_form.value += ' <a href="' + responseJSON.file + '"><img src="' + responseJSON.file + '" alt="" /></a> '
 					
 					if (toolbar_animation) {
 						element = document.getElementById('post-form-image-uploader');

@@ -4,7 +4,7 @@ Donate link: http://master5o1.com/donate/
 Tags: bbPress, bbPress 2.0, toolbar, youtube, images, smilies, smileys, emoticons, 5o1
 Requires at least: WordPress 3.1+ and bbPress 2.0+
 Tested up to: 3.2.1
-Stable tag: 0.6.5
+Stable tag: 0.7.0
 
 Post toolbar for bbPress 2.0.
 
@@ -69,6 +69,7 @@ I recommend that this folder is either copied or moved to the `/wp-content/` dir
 
 = 0.7.0 =
 
+* Made images be anchored to their image file also.  As requested in [this topic](http://master5o1.com/topic/image-hyperlinks/) on my forum.
 * Built custom CSS ability.  Uses the default toolbar.css if there is not custom CSS available.  Custom CSS replaces toolbar.css and is run before the default/extended button css.
 * Custom button ordering.  Drag and drop using jQuery's Sortable.
 
