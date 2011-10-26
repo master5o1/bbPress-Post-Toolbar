@@ -38,7 +38,7 @@ class bbp_5o1_video_panel {
 		$supported = __( 'Supported video providers:', 'bbp_5o1_toolbar' );
 		$random_ex = __( 'Random Example:', 'bbp_5o1_toolbar' );
 		$item['data'] = <<<HTML
-<div style="width: 310px; display: inline-block;"><span>${online_vid_url}:</span><br />
+<div style="width: 310px; display: inline-block;"><span>${online_vid_url}</span><br />
 <input style="display:inline-block;width:300px;" type="text" id="video_url" value="" /></div>
 <a class="toolbar-apply" style="margin-top: 1.4em;" onclick="insert_panel('video');">Apply Link</a>
 <p style="font-size: x-small;"><span>${supported} ${video_providers}</span><br />
