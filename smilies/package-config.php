@@ -5,15 +5,17 @@
 
 $wpsmiliestrans = array(
 	':)'  => 'smile.png',
+	'(:'  => 'smile.png',
 	':('  => 'sad.png',
+	'):'  => 'sad.png',
 	';)'  => 'wink.png',
 	':|'  => 'lameface.png',
 	':D'  => 'laugh2.png',
+	'D:'  => 'laugh2.png',
 	':S'  => 'confused.png',
 	':P'  => 'tongue.png',
 	':O'  => 'gasp.png',
 	'(lolo)'  => 'laugh.png',
-
 	':B'  => 'toothy.png',
 	':Z'  => 'sleep.png',
 	';|'  => 'bored.png',
