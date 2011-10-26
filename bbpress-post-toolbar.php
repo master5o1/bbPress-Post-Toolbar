@@ -33,47 +33,37 @@ add_action( 'wp_footer' , array('bbp_5o1_toolbar', 'post_form_toolbar_footer_scr
 // bbPress 2.0 Actions & Filters:
 add_action( 'bbp_init' , array('bbp_5o1_toolbar', 'script_and_style') );
 if ( !get_option( 'bbp_5o1_toolbar_manual_insertion' ) ) {
-	/*
-	The following add_actions are pairs related to `reply` and `topic`.
-	Comment out one pair before uncommenting the next.
-	As you can see, the // is the comment marker.
-	
-	If none of the 3 pairs work for your site, then flip the `if ( true ) {` to false; `if ( false ) {`
-	This should revert it to the old method, as explained below.
-	
-	I may make the decision between these be an option in the settings, but at the moment I'm tired
-	and want to get the changes released before I go skiing for a week.  Why? So that the toolbar-images-panel.php
-	gets fixed.  Also, I've forgot what I did change...but committing will find that.
-	*/
-	if ( true ) {
-	// This is the best case at the moment because of the default theme avatar placement.
-	add_action( 'bbp_theme_before_reply_form_notices' , array('bbp_5o1_toolbar', 'post_form_toolbar_bar') );
-	add_action( 'bbp_theme_before_topic_form_notices' , array('bbp_5o1_toolbar', 'post_form_toolbar_bar') );
-	
-	// Avatar makes it look heaps yuck if I use these two.
-	// add_action( 'bbp_theme_before_reply_form_content' , array('bbp_5o1_toolbar', 'post_form_toolbar_bar') );
-	// add_action( 'bbp_theme_before_topic_form_content' , array('bbp_5o1_toolbar', 'post_form_toolbar_bar') );
-	
-	// Don't like it being _after_ the text area.
-	// add_action( 'bbp_theme_after_reply_form_content' , array('bbp_5o1_toolbar', 'post_form_toolbar_bar') );
-	// add_action( 'bbp_theme_after_topic_form_content' , array('bbp_5o1_toolbar', 'post_form_toolbar_bar') );
-	
-		define( 'BBP_5o1_DELETE_EXCESS_TOOLBARS', false );
-	// Old way:
-	} else {
-	/*
-	If the above add_actions don't work for you, make the if statement `if ( false ) {` instead of true.
-	This will revert it to the OLD method of printing the bar wherever bbp_template_notices are and then
-	attempting to delete the excess toolbars.
-	Just note, this option will not be available in 7.0 or greater.
-	*/
-		define( 'BBP_5o1_DELETE_EXCESS_TOOLBARS', true );
-		add_action( 'bbp_template_notices' , array('bbp_5o1_toolbar', 'post_form_toolbar_bar') );
+	$bbp_5o1_toolbar_hook_to_use = 0; // Possible values are: 0, 1, 2, 3.
+	switch ($bbp_5o1_toolbar_hook_to_use) {
+		case 0:
+			// This is the best case at the moment because of the default theme avatar placement.
+			add_action( 'bbp_theme_before_reply_form_notices' , array('bbp_5o1_toolbar', 'post_form_toolbar_bar') );
+			add_action( 'bbp_theme_before_topic_form_notices' , array('bbp_5o1_toolbar', 'post_form_toolbar_bar') );
+			define( 'BBP_5o1_DELETE_EXCESS_TOOLBARS', false );
+			break;
+		case 1:
+			// Avatar makes it look heaps yuck if I use these two.
+			add_action( 'bbp_theme_before_reply_form_content' , array('bbp_5o1_toolbar', 'post_form_toolbar_bar') );
+			add_action( 'bbp_theme_before_topic_form_content' , array('bbp_5o1_toolbar', 'post_form_toolbar_bar') );
+			define( 'BBP_5o1_DELETE_EXCESS_TOOLBARS', false );
+			break;
+		case 2:
+			// Don't like it being _after_ the text area.
+			add_action( 'bbp_theme_after_reply_form_content' , array('bbp_5o1_toolbar', 'post_form_toolbar_bar') );
+			add_action( 'bbp_theme_after_topic_form_content' , array('bbp_5o1_toolbar', 'post_form_toolbar_bar') );
+			define( 'BBP_5o1_DELETE_EXCESS_TOOLBARS', false );
+			break;
+		case 3:
+			// If the above add_actions don't work for you, make the if statement `if ( false ) {` instead of true.
+			// This will revert it to the OLD method of printing the bar wherever bbp_template_notices are and then
+			// attempting to delete the excess toolbars.
+			define( 'BBP_5o1_DELETE_EXCESS_TOOLBARS', true );
+			add_action( 'bbp_template_notices' , array('bbp_5o1_toolbar', 'post_form_toolbar_bar') );
+			break;
 	}
-}
-if ( get_option( 'bbp_5o1_toolbar_manual_insertion' ) )
+} else {
 	add_action( 'bbp_post_toolbar_insertion', array('bbp_5o1_toolbar','post_form_toolbar_bar') );
-
+}
 // Components:
 if ( get_option( 'bbp_5o1_toolbar_use_formatting' ) )
 	require_once( dirname(__FILE__) . '/toolbar-format.php' );

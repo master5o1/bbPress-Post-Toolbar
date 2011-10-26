@@ -4,7 +4,6 @@
 add_filter( 'bbp_5o1_toolbar_add_items' , array('bbp_5o1_toolbar_format', 'entry'), 0 );
 add_filter( 'bbp_5o1_toolbar_add_items' , array('bbp_5o1_toolbar_format', 'close_tags_entry'), 990 );
 
-//add_action( 'bbp_head', array('bbp_5o1_toolbar_format', 'color_style') );
 add_action( 'bbp_5o1_toolbar_css', array('bbp_5o1_toolbar_format', 'color_style') );
 
 add_filter( 'bbp_get_reply_content', array('bbp_5o1_toolbar_format', 'add_code_shortcode'), -999 );
@@ -24,7 +23,7 @@ class bbp_5o1_toolbar_format {
 		$tagregexp = join( '|', array_map('preg_quote', $tagnames) );
 		$pattern = '(.?)\[('.$tagregexp.')\b(.*?)(?:(\/))?\](?:(.+?)\[\/\2\])?(.?)';
 		// This allows it to pick up the HTML <code> tag.
-		$content = preg_replace( array('/\<code(\ title\=\"[^"]*\")?\>/', '/\<\/code\>/'), array('[code$1]', '[/code]'), $content );
+		// $content = preg_replace( array('/\<code(\ title\=\"[^"]*\")?\>/', '/\<\/code\>/'), array('[code$1]', '[/code]'), $content );
 		return preg_replace_callback('/'.$pattern.'/s', 'do_shortcode_tag',  $content);
 	}
 		

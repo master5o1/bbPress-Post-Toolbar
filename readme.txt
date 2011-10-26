@@ -67,7 +67,7 @@ I recommend that this folder is either copied or moved to the `/wp-content/` dir
 
 == Changelog ==
 
-= 0.6.5 =
+= 0.7.0 =
 
 * Built custom CSS ability.  Uses the default toolbar.css if there is not custom CSS available.  Custom CSS replaces toolbar.css and is run before the default/extended button css.
 * Custom button ordering.  Drag and drop using jQuery's Sortable.
@@ -231,3 +231,11 @@ Really, just look inside toolbar.js
 * Insert a color: `insert_color('red')`
 * Insert a size: `insert_size('5pt')`
 * `testText(tag_s, tag_e)` can be used to try to wrap a start- and end-tag around selected text.  If there is text selected then the tag will be applied at the end of the post content wrapped around a single space.
+
+= Available Action/Filter hookers =
+
+These are filters or actions that I have made to make buttons populate the bar:
+
+* apply_filters( 'bbp_5o1_toolbar_add_items', array() );
+* do_action( 'bbp_5o1_toolbar_css' );
+* ...
