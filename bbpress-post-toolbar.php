@@ -3,7 +3,7 @@
  Plugin Name: bbPress Post Toolbar
  Plugin URI: http://wordpress.org/extend/plugins/bbpress-post-toolbar/
  Description: A toolbar for bbPress that can be extended by other plugins.
- Version: 0.7.0
+ Version: 0.7.1
  Author: Jason Schwarzenberger
  Author URI: http://master5o1.com/
 */
