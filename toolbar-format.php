@@ -26,7 +26,7 @@ class bbp_5o1_toolbar_format {
 		// $content = preg_replace( array('/\<code(\ title\=\"[^"]*\")?\>/', '/\<\/code\>/'), array('[code$1]', '[/code]'), $content );
 		return preg_replace_callback('/'.$pattern.'/s', 'do_shortcode_tag',  $content);
 	}
-		
+
 	function do_code( $atts = null, $content = null ) {
 		global $magic_code_shortcode_content_array;
 		extract(shortcode_atts(array(
@@ -69,7 +69,7 @@ class bbp_5o1_toolbar_format {
 		}
 		return $content;
 	}
-	
+
 	function code_style() {
 		return <<<STYLE
 span.code-inline {
@@ -137,7 +137,7 @@ div.code-main:hover .code-line {
 }
 STYLE;
 	}
-	
+
 	function close_tags_entry($items) {
 		$items[] = array( 'action' => 'api_item',
 			'inside_anchor' => '<small title="Close HTML Tags">&lt;/&gt;</small>',
@@ -146,7 +146,7 @@ STYLE;
 	}
 
 	function entry($items) {
-	
+
 		$items[] = array( 'action' => 'api_item',
 						 'inside_anchor' => '<img src="' . plugins_url( '/images/bold.png', __FILE__ ) . '" title="Bold" alt="Bold" />',
 						 'data' => "function(stack){insertHTML(stack, 'strong', []);}");
@@ -197,7 +197,7 @@ STYLE;
 <a class="toolbar-apply" style="margin-top: 1.4em;" onclick="insert_panel(\'link\');">Apply Link</a>');
 		return $items;
 	}
-		
+
 	function colors() {
 		$colors[] = 'Red';
 		$colors[] = 'Green';
@@ -213,7 +213,7 @@ STYLE;
 		$colors[] = 'Violet';
 		return $colors;
 	}
-	
+
 	function color_formatting() {
 		$colors = bbp_5o1_toolbar_format::colors();
 		$html = '';
@@ -224,7 +224,7 @@ STYLE;
 		$chooser = '<div style="background:' . strtolower($color) . ';" class="color-chooser">' . $html . "</div>";
 		return "<strong>Pick a color, any color... as long as it's black.</strong>" . $chooser;
 	}
-	
+
 	function color_style() {
 		$colors = bbp_5o1_toolbar_format::colors();
 	 ?>
@@ -240,7 +240,7 @@ STYLE;
 <?php echo bbp_5o1_toolbar_format::code_style(); ?>
 	 <?php
 	}
-	
+
 	function size_formatting() {
 		$sizes[] = "xx-small";
 		$sizes[] = "x-small";
@@ -252,9 +252,9 @@ STYLE;
 		foreach ($sizes as $size) {
 			$html .= '<a class="size" onclick="insert_size(\'' . $size . '\');" style="font-size:' . $size . ';">' . $size . '</a>';
 		}
-		
+
 		$html .= '<br /><br />';
-		
+
 		$fonts[] = "Arial";
 		$fonts[] = "'Comic Sans MS'";
 		$fonts[] = "Courier";
@@ -263,13 +263,12 @@ STYLE;
 		$fonts[] = "'Times New Roman'";
 		$fonts[] = "Ubuntu";
 		$fonts[] = "Verdana";
-		
+
 		foreach ($fonts as $font) {
 			$html .= '<a title="' . $font . '" onclick="insert_font(\'' . addslashes($font) . '\');" style="cursor: pointer; display: inline-block; margin:0 0.5em;font-family:' . $font . '; font-size: 1.4em;">' . $font . '</a> ';
 		}
 		return '<div style="text-align: center;">' . $html . '</div>';
 	}
-	
-}
 
+}
 ?>

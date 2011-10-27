@@ -24,7 +24,7 @@ class bbp_5o1_images_panel {
 <div id="post-form-image-uploader"><noscript><p>Please enable JavaScript to use file uploader.</p></noscript></div>');
 		return $items;
 	}
-	
+
 	function script_and_style() {
 		wp_register_script( 'bbp_5o1_post_toolbar_uploader_script', plugins_url('includes/fileuploader.js', __FILE__) );
 		wp_register_style( 'bbp_5o1_post_toolbar_uploader_style', plugins_url('includes/fileuploader.css', __FILE__) );
@@ -34,12 +34,12 @@ class bbp_5o1_images_panel {
 			wp_enqueue_style( 'bbp_5o1_post_toolbar_uploader_style' );
 		}
 	}
-	
+
 	function fileupload_trigger($vars) {
 		$vars[] = 'postform_fileupload';
 		return $vars;
 	}
-	
+
 	// PHP.net gave this.
 	function return_bytes($val) {
 		$val = trim($val);
@@ -55,7 +55,7 @@ class bbp_5o1_images_panel {
 		}
 		return $val;
 	}
-	
+
 	function fileupload_trigger_check() {
 		if ( intval(get_query_var('postform_fileupload')) == 1 ) {
 			if ( ! ( get_option( 'bbp_5o1_toolbar_allow_image_uploads' ) && ( is_user_logged_in() || get_option( 'bbp_5o1_toolbar_allow_anonymous_image_uploads' ) ) ) ) {
@@ -86,12 +86,12 @@ class bbp_5o1_images_panel {
 				'post_title' => $result['name'],
 				'post_content' => 'Image uploaded for a forum topic or reply.',
 			);
-			
+
 			// Save the data
 			$id = wp_insert_attachment($attachment, $result['file'], 0);
 			$result['id'] = $id;
 			$result['attachment'] = $attachment;
-			
+
 			$result = array(
 				"success" => true,
 				"file" => $attachment['guid']
@@ -100,7 +100,7 @@ class bbp_5o1_images_panel {
 			exit;
 		}
 	}
-	
+
 	function fileupload_start() {
 		if ( ! ( get_option( 'bbp_5o1_toolbar_allow_image_uploads' ) && ( is_user_logged_in() || get_option( 'bbp_5o1_toolbar_allow_anonymous_image_uploads' ) ) ) )
 			return;
@@ -110,7 +110,7 @@ class bbp_5o1_images_panel {
 			var uploader = new qq.FileUploader({
 				element: document.getElementById('post-form-image-uploader'),
 				action: '<?php print get_site_url() . '/?postform_fileupload=1'; ?>',
-				allowedExtensions: ['jpg', 'jpeg', 'png', 'gif'],        
+				allowedExtensions: ['jpg', 'jpeg', 'png', 'gif'],
 				/* <?php echo ini_get('upload_max_filesize'); ?> <?php echo ini_get('post_max_size'); ?> */
 				sizeLimit: <?php echo bbp_5o1_images_panel::return_bytes(min(array(ini_get('post_max_size'), ini_get('upload_max_filesize')))); ?>,
 				onComplete: function(id, fileName, responseJSON){
@@ -118,7 +118,7 @@ class bbp_5o1_images_panel {
 					post_form = document.getElementById('bbp_reply_content');
 					if (post_form==null) post_form = document.getElementById('bbp_topic_content');
 					post_form.value += ' <a href="' + responseJSON.file + '"><img src="' + responseJSON.file + '" alt="" /></a> '
-					
+
 					if (toolbar_animation) {
 						element = document.getElementById('post-form-image-uploader');
 						height = parseInt(element.parentNode.style.height, 10) + 16; // assuming 1.0 em = 16px at this time.
@@ -132,8 +132,8 @@ class bbp_5o1_images_panel {
 		</script>
 		<?php
 	}
-	
-}	
+
+}
 
 if ( !CUSTOM_TAGS ) {
 $allowedtags['img'] = array(

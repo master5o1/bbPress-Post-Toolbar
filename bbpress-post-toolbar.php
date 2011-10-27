@@ -10,7 +10,7 @@
 /*  Copyright 2011  Jason Schwarzenberger  (email : jason@master5o1.com)
 
     This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License, version 2, as 
+    it under the terms of the GNU General Public License, version 2, as
     published by the Free Software Foundation.
 
     This program is distributed in the hope that it will be useful,
@@ -74,7 +74,7 @@ if ( get_option( 'bbp_5o1_toolbar_use_smilies' ) )
 if ( get_option( 'bbp_5o1_toolbar_use_images' ) )
 	require_once( dirname(__FILE__) . '/toolbar-images-panel.php' );
 
-// Plugin Activation/Deactivation Hooks:	
+// Plugin Activation/Deactivation Hooks:
 register_activation_hook(__FILE__, array('bbp_5o1_toolbar', 'plugin_activation') );
 register_deactivation_hook(__FILE__, array('bbp_5o1_toolbar', 'plugin_deactivation') );
 
@@ -94,14 +94,14 @@ class bbp_5o1_toolbar {
 		$plugin_data = get_file_data( __FILE__, array( 'Version' => 'Version' ), 'plugin' );
 		return $plugin_data['Version'];
 	}
-	
+
 	function plugin_activation() {
 		// Components:
 		add_option( 'bbp_5o1_toolbar_use_youtube', true, '', 'yes' );
 		add_option( 'bbp_5o1_toolbar_use_formatting', true, '', 'yes' );
 		add_option( 'bbp_5o1_toolbar_use_smilies', true, '', 'yes' );
 		add_option( 'bbp_5o1_toolbar_use_images', false, '', 'yes' );
-		
+
 		add_option( 'bbp_5o1_toolbar_use_custom_smilies', false, '', 'yes' );
 		add_option( 'bbp_5o1_toolbar_use_textalign', false, '', 'yes' );
 		add_option( 'bbp_5o1_toolbar_show_credit', false, '', 'yes' );
@@ -110,13 +110,13 @@ class bbp_5o1_toolbar {
 		add_option( 'bbp_5o1_toolbar_allow_anonymous_image_uploads', false, '', 'yes' );
 		add_option( 'bbp_5o1_toolbar_allow_image_uploads', true, '', 'yes' );
 	}
-	
+
 	function plugin_deactivation() {
 		delete_option( 'bbp_5o1_toolbar_use_youtube' );
 		delete_option( 'bbp_5o1_toolbar_use_formatting' );
 		delete_option( 'bbp_5o1_toolbar_use_smilies' );
 		delete_option( 'bbp_5o1_toolbar_use_images' );
-		
+
 		delete_option( 'bbp_5o1_toolbar_use_custom_smilies' );
 		delete_option( 'bbp_5o1_toolbar_use_textalign' );
 		delete_option( 'bbp_5o1_toolbar_show_credit' );
@@ -125,7 +125,7 @@ class bbp_5o1_toolbar {
 		delete_option( 'bbp_5o1_toolbar_allow_anonymous_image_uploads' );
 		delete_option( 'bbp_5o1_toolbar_allow_image_uploads' );
 	}
-	
+
 	function admin_add_settings_link( $links, $file ) {
 		if ( 'bbpress-post-toolbar/bbpress-post-toolbar.php' != $file )
 			return $links;
@@ -133,12 +133,12 @@ class bbp_5o1_toolbar {
 		array_unshift( $links, $settings_link );
 		return $links;
 	}
-	
+
 	function plugin_options_page() {
 		if (!current_user_can('manage_options'))  {
 			wp_die( __('You do not have sufficient permissions to access this page.') );
 		}
-		
+
 		// Components:
 		$use_youtube = false;
 		if ( get_option( 'bbp_5o1_toolbar_use_youtube' ) )
@@ -152,7 +152,7 @@ class bbp_5o1_toolbar {
 		$use_images = false;
 		if ( get_option( 'bbp_5o1_toolbar_use_images' ) )
 			$use_images = true;
-		
+
 		$custom_smilies = false;
 		if ( get_option('bbp_5o1_toolbar_use_custom_smilies') )
 			$custom_smilies = true;
@@ -212,7 +212,7 @@ class bbp_5o1_toolbar {
 						<strong><?php _e('Show formatting buttons?', 'bbp_5o1_toolbar'); ?></strong><br /><br />
 						<span style="margin: 0 50px;">
 						<label style="display: inline-block; width: 150px;"><input name="bbp_5o1_toolbar_use_formatting" type="radio" value="1" <?php print (($use_formatting) ? 'checked="checked"' : '' ) ?> /> <?php _e('Yes (default)', 'bbp_5o1_toolbar'); ?></label>
-						<label><input name="bbp_5o1_toolbar_use_formatting" type="radio" value="0" <?php print ((!$use_formatting) ? 
+						<label><input name="bbp_5o1_toolbar_use_formatting" type="radio" value="0" <?php print ((!$use_formatting) ?
 'checked="checked"' : '' ) ?> /> <?php _e('No', 'bbp_5o1_toolbar'); ?></label>
 						</span>
 					</p>
@@ -222,17 +222,17 @@ class bbp_5o1_toolbar {
 							<strong><?php _e('Allow text-alignment buttons?', 'bbp_5o1_toolbar'); ?></strong><br /><br />
 							<span style="margin: 0 50px;">
 							<label style="display: inline-block; width: 150px;"><input name="bbp_5o1_toolbar_use_textalign" type="radio" value="1" <?php print (($textalign) ? 'checked="checked"' : '' ) ?> /> <?php _e('Yes', 'bbp_5o1_toolbar'); ?></label>
-							<label><input name="bbp_5o1_toolbar_use_textalign" type="radio" value="0" <?php print ((!$textalign) ? 
+							<label><input name="bbp_5o1_toolbar_use_textalign" type="radio" value="0" <?php print ((!$textalign) ?
 	'checked="checked"' : '' ) ?> /> <?php _e('No (default)', 'bbp_5o1_toolbar'); ?></label>
 							</span>
 						</p>
 					</div>
 					<?php endif; ?>
 					<p>
-						<strong><?php _e('Allow images to be posted?', 'bbp_5o1_toolbar'); ?></strong><br /><br />	
+						<strong><?php _e('Allow images to be posted?', 'bbp_5o1_toolbar'); ?></strong><br /><br />
 						<span style="margin: 0 50px;">
 							<label style="display: inline-block; width: 150px;"><input name="bbp_5o1_toolbar_use_images" type="radio" value="1" <?php print (($use_images) ? 'checked="checked"' : '' ) ?> /> <?php _e('Yes', 'bbp_5o1_toolbar'); ?></label>
-							<label><input name="bbp_5o1_toolbar_use_images" type="radio" value="0" <?php print ((!$use_images) ? 
+							<label><input name="bbp_5o1_toolbar_use_images" type="radio" value="0" <?php print ((!$use_images) ?
 	'checked="checked"' : '' ) ?> /> <?php _e('No (default)', 'bbp_5o1_toolbar'); ?></label>
 						</span>
 					</p>
@@ -242,7 +242,7 @@ class bbp_5o1_toolbar {
 							<strong><?php _e('Allow users to upload images?', 'bbp_5o1_toolbar'); ?></strong><br /><br />
 							<span style="margin: 0 50px;">
 							<label style="display: inline-block; width: 150px;"><input name="bbp_5o1_toolbar_allow_image_uploads" type="radio" value="1" <?php print (($image_uploads) ? 'checked="checked"' : '' ) ?> /> <?php _e('Yes', 'bbp_5o1_toolbar'); ?></label>
-							<label><input name="bbp_5o1_toolbar_allow_image_uploads" type="radio" value="0" <?php print ((!$image_uploads) ? 
+							<label><input name="bbp_5o1_toolbar_allow_image_uploads" type="radio" value="0" <?php print ((!$image_uploads) ?
 	'checked="checked"' : '' ) ?> /> <?php _e('No (default)', 'bbp_5o1_toolbar'); ?></label>
 							</span><br />
 							<div style="margin: 0 50px;">
@@ -255,7 +255,7 @@ class bbp_5o1_toolbar {
 								<strong><?php _e('Allow unregistered users to upload images?', 'bbp_5o1_toolbar'); ?></strong><br /><br />
 								<span style="margin: 0 50px;">
 								<label style="display: inline-block; width: 150px;"><input name="bbp_5o1_toolbar_allow_anonymous_image_uploads" type="radio" value="1" <?php print (($anonymous_image_uploads) ? 'checked="checked"' : '' ) ?> /> <?php _e('Yes', 'bbp_5o1_toolbar'); ?></label>
-								<label><input name="bbp_5o1_toolbar_allow_anonymous_image_uploads" type="radio" value="0" <?php print ((!$anonymous_image_uploads) ? 
+								<label><input name="bbp_5o1_toolbar_allow_anonymous_image_uploads" type="radio" value="0" <?php print ((!$anonymous_image_uploads) ?
 		'checked="checked"' : '' ) ?> /> <?php _e('No (default)', 'bbp_5o1_toolbar'); ?></label>
 								</span><br />
 							</p>
@@ -281,7 +281,7 @@ class bbp_5o1_toolbar {
 						<strong><?php _e('Allow manual insertion of the bar?', 'bbp_5o1_toolbar'); ?></strong><br /><br />
 						<span style="margin: 0 50px;">
 						<label style="display: inline-block; width: 150px;"><input name="bbp_5o1_toolbar_manual_insertion" type="radio" value="1" <?php print (($manual) ? 'checked="checked"' : '' ) ?> /> <?php _e('Yes', 'bbp_5o1_toolbar'); ?></label>
-						<label><input name="bbp_5o1_toolbar_manual_insertion" type="radio" value="0" <?php print ((!$manual) ? 
+						<label><input name="bbp_5o1_toolbar_manual_insertion" type="radio" value="0" <?php print ((!$manual) ?
 'checked="checked"' : '' ) ?> /> <?php _e('No (default)', 'bbp_5o1_toolbar'); ?></label>
 						</span><br />
 						<div style="margin: 0 50px;"><small><?php _e("Note: Manual bar insertion requires that you use <code>&lt;?php do_action( 'bbp_post_toolbar_insertion' ); ?&gt;</code> in your theme files, or wherever you desire the bar to appear.", 'bbp_5o1_toolbar'); ?></small></div>
@@ -290,7 +290,7 @@ class bbp_5o1_toolbar {
 						<strong><?php _e('Link to master5o1&#39;s website in the About panel as a credit to the plugin developer?', 'bbp_5o1_toolbar'); ?></strong><br /><br />
 						<span style="margin: 0 50px;">
 						<label style="display: inline-block; width: 150px;"><input name="bbp_5o1_toolbar_show_credit" type="radio" value="1" <?php print (($credit) ? 'checked="checked"' : '' ) ?> /> <?php _e('Yes', 'bbp_5o1_toolbar'); ?></label>
-						<label><input name="bbp_5o1_toolbar_show_credit" type="radio" value="0" <?php print ((!$credit) ? 
+						<label><input name="bbp_5o1_toolbar_show_credit" type="radio" value="0" <?php print ((!$credit) ?
 'checked="checked"' : '' ) ?> /> <?php _e('No (default)', 'bbp_5o1_toolbar'); ?></label>
 						</span><br />
 						<div style="margin: 0 50px;">
@@ -305,60 +305,60 @@ class bbp_5o1_toolbar {
 		</div>
 		<?php
 	}
-	
+
 	function plugin_do_options() {
 		if ( !is_admin() || !current_user_can('manage_options') )
 			return;
 		if (isset($_POST['bbpress-post-toolbar']) && $_POST['bbpress-post-toolbar'] == "bbpress-post-toolbar") {
 
 			update_option('bbp_5o1_toolbar_sort_order', $_POST['bbp_5o1_toolbar_sort_order']);
-			
-			
+
+
 			// Components:
 			if ($_POST['bbp_5o1_toolbar_use_youtube'] == 1)
 				update_option('bbp_5o1_toolbar_use_youtube', true);
 			elseif ($_POST['bbp_5o1_toolbar_use_youtube'] == 0)
 				update_option('bbp_5o1_toolbar_use_youtube', false);
-				
+
 			if ($_POST['bbp_5o1_toolbar_use_formatting'] == 1)
 				update_option('bbp_5o1_toolbar_use_formatting', true);
 			elseif ($_POST['bbp_5o1_toolbar_use_formatting'] == 0)
 				update_option('bbp_5o1_toolbar_use_formatting', false);
-			
+
 			if ($_POST['bbp_5o1_toolbar_use_images'] == 1)
 				update_option('bbp_5o1_toolbar_use_images', true);
 			elseif ($_POST['bbp_5o1_toolbar_use_images'] == 0)
 				update_option('bbp_5o1_toolbar_use_images', false);
-			
+
 			if ($_POST['bbp_5o1_toolbar_use_smilies'] == 1)
 				update_option('bbp_5o1_toolbar_use_smilies', true);
 			elseif ($_POST['bbp_5o1_toolbar_use_smilies'] == 0)
 				update_option('bbp_5o1_toolbar_use_smilies', false);
-				
+
 			if ($_POST['bbp_5o1_toolbar_use_beta'] == 1)
 				update_option('bbp_5o1_toolbar_use_beta', true);
 			elseif ($_POST['bbp_5o1_toolbar_use_beta'] == 0)
 				update_option('bbp_5o1_toolbar_use_beta', false);
-		
-		
+
+
 			if ($_POST['bbp_5o1_toolbar_use_custom_smilies'] == 1)
 				update_option('bbp_5o1_toolbar_use_custom_smilies', true);
 			elseif ($_POST['bbp_5o1_toolbar_use_custom_smilies'] == 0)
 				update_option('bbp_5o1_toolbar_use_custom_smilies', false);
-				
+
 			if ($_POST['bbp_5o1_toolbar_use_textalign'] == 1)
 				update_option('bbp_5o1_toolbar_use_textalign', true);
 			elseif ($_POST['bbp_5o1_toolbar_use_textalign'] == 0)
 				update_option('bbp_5o1_toolbar_use_textalign', false);
-				
+
 			if ($_POST['bbp_5o1_toolbar_show_credit'] == 1)
 				update_option('bbp_5o1_toolbar_show_credit', true);
 			elseif ($_POST['bbp_5o1_toolbar_show_credit'] == 0)
 				update_option('bbp_5o1_toolbar_show_credit', false);
-			
+
 			update_option('bbp_5o1_toolbar_custom_help', $_POST['bbp_5o1_toolbar_custom_help']);
 			update_option('bbp_5o1_toolbar_custom_css', $_POST['bbp_5o1_toolbar_custom_css']);
-			
+
 			if ($_POST['bbp_5o1_toolbar_manual_insertion'] == 1)
 				update_option('bbp_5o1_toolbar_manual_insertion', true);
 			elseif ($_POST['bbp_5o1_toolbar_manual_insertion'] == 0)
@@ -367,8 +367,8 @@ class bbp_5o1_toolbar {
 			if ($_POST['bbp_5o1_toolbar_allow_anonymous_image_uploads'] == 1)
 				update_option('bbp_5o1_toolbar_allow_anonymous_image_uploads', true);
 			elseif ($_POST['bbp_5o1_toolbar_allow_anonymous_image_uploads'] == 0)
-				update_option('bbp_5o1_toolbar_allow_anonymous_image_uploads', false);	
-				
+				update_option('bbp_5o1_toolbar_allow_anonymous_image_uploads', false);
+
 			if ($_POST['bbp_5o1_toolbar_allow_image_uploads'] == 1)
 				update_option('bbp_5o1_toolbar_allow_image_uploads', true);
 			elseif ($_POST['bbp_5o1_toolbar_allow_image_uploads'] == 0)
@@ -376,7 +376,7 @@ class bbp_5o1_toolbar {
 
 		}
 	}
-	
+
 	function admin_add_config_link() {
 		if ( function_exists('add_submenu_page') )
 			add_submenu_page('plugins.php', __('bbPress Post Toolbar Options', 'bbp_5o1_toolbar'), __('bbPress Post Toolbar', 'bbp_5o1_toolbar'), 'manage_options', 'bbpress-post-toolbar', array('bbp_5o1_toolbar','plugin_options_page') );
@@ -397,7 +397,7 @@ class bbp_5o1_toolbar {
 			?><?php
 				$i = 0;
 				foreach ($items as $item) :
-					if ($item['action'] == 'api_item') : 
+					if ($item['action'] == 'api_item') :
 						?><li><a onclick="do_button(this, {action : '<?php echo $item['action']; ?>', panel : 'post-toolbar-item-<?php print $i; ?>'}, <?php echo $item['data']; ?>)"><?php echo $item['inside_anchor']; ?></a></li><?php
 					else:
 						?><li><a onclick="do_button(this, { action : '<?php echo $item['action']; ?>', panel : 'post-toolbar-item-<?php print $i; ?>' }, function(){ return '<?php if ($item['action'] == 'insert_data' || $item['action'] == 'insert_shortcode') { echo $item['data']; } elseif (isset($item['panel'])) {echo $item['panel'];} ?>';})"><?php echo $item['inside_anchor']; ?></a></li><?php
@@ -433,7 +433,7 @@ class bbp_5o1_toolbar {
 		<?php
 		return $param;
 	}
-	
+
 	function post_form_toolbar_footer_script() {
 		?>
 		<script type="text/javascript"><!--
@@ -452,26 +452,26 @@ class bbp_5o1_toolbar {
 		wp_register_script( 'bbp_5o1_post_toolbar_script', plugins_url('includes/toolbar.js', __FILE__) );
 		//wp_register_style( 'bbp_5o1_post_toolbar_style', plugins_url('includes/toolbar.css', __FILE__) );
 		wp_register_style( 'bbp_5o1_post_toolbar_style', site_url('/?bbp_5o1_toolbar_css') );
-		
+
 		wp_enqueue_script( 'bbp_5o1_post_toolbar_script' );
 		wp_enqueue_style( 'bbp_5o1_post_toolbar_style' );
 	}
-	
+
 	function css_trigger($vars) {
 		$vars[] = 'bbp_5o1_toolbar_css';
 		return $vars;
 	}
-	
+
 	function css_trigger_check() {
 		if ( !isset($_GET['bbp_5o1_toolbar_css']) ) { return; }
 		header("Content-Type: text/css");
 		if ( ! get_option('bbp_5o1_toolbar_custom_css') ) {
-			echo "/* begin default CSS: */\n"; 
+			echo "/* begin default CSS: */\n";
 			echo file_get_contents( dirname(__FILE__) . '/includes/toolbar.css' );
 			echo "\n";
 			echo "/* end default CSS: */\n";
 		} else {
-			echo "/* begin custom CSS: */\n"; 
+			echo "/* begin custom CSS: */\n";
 			echo get_option('bbp_5o1_toolbar_custom_css');
 			echo "\n";
 			echo "/* end custom CSS: */\n";
@@ -483,47 +483,46 @@ class bbp_5o1_toolbar {
 		echo "/* end toolbar buttons/extensions CSS: */\n";
 		exit;
 	}
-	
+
 	function button_ordering( $items ) {
 		if ( ! get_option( 'bbp_5o1_toolbar_sort_order' ) )
 			return $items;
 		$order_str = trim(get_option( 'bbp_5o1_toolbar_sort_order' ), ' ,');
 		$sort_order = explode(',', $order_str);
-
 		$items_hashes = array_flip($sort_order);
 
+		$new_items = array();
 		foreach ($items_hashes as $hash => $item) {
 			if ($hash != md5('')) {
 				$new_items[$hash] = -1;
 			}
 		}
-		
+
 		foreach ($items as $item) {
 			$hash = md5( $item['action'] . $item['inside_anchor'] );
 			if ($hash != md5('')) {
 				$new_items[$hash] = $item;
 			}
 		}
-		
+
 		$items = array();
 		$hashes = '';
 		foreach ($new_items as $hash => $item) {
-			//$hash = md5( $item['action'] . $item['inside_anchor'] );
 			if ($hash != md5('')) {
 				$hashes .= $hash . ',';
 				$items[] = $item;
 			}
 		}
 		update_option('bbp_5o1_toolbar_sort_order', trim($hashes, ' ,'));
-		
+
 		return $items;
 	}
-	
+
 	function button_ordering_style() {
 		echo <<<HTML
 <style type="text/css">
-	#sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; background-color: #eaeaea; border: solid 1px #e5e5e5;}
-	#sortable li { cursor: pointer; margin: 4px; vertical-align: middle; padding: 2px 3px; width: 20px; height: 20px; display: inline-block; background-color: #f5f5f5; border: solid 1px #bbb; }
+	#sortable { list-style-type: none; margin: 0 0 10px; padding: 0; width: 100%; background-color: #eaeaea; border: solid 1px #e5e5e5;}
+	#sortable li { text-align: center; vertical-align: middle; cursor: pointer; margin: 4px; padding: 3px 0 2px; min-width: 25px; height: 20px; display: inline-block; background-color: #f5f5f5; border: solid 1px #bbb; }
 </style>
 <script type="text/javascript">
 	jQuery(document).ready(function(){
@@ -543,7 +542,7 @@ class bbp_5o1_toolbar {
 </script>
 HTML;
 	}
-	
+
 	function button_ordering_script() {
 			wp_enqueue_script( 'jquery' );
 			wp_enqueue_script( 'jquery-ui-sortable' );
@@ -566,7 +565,7 @@ HTML;
 			$hashes .= $hash . ',';
 			echo '<li id="' . $hash . '" class="ui-state-default">' . $item['inside_anchor'] . '</li>';
 		}
-		
+
 		echo '</ul>' . "\n";
 		echo '<input type="hidden" name="bbp_5o1_toolbar_sort_order" id="sort-order-hashes" value="' . trim($hashes, ' ,') . '" />' . "\n";
 		echo '<input type="submit" onclick="document.getElementById(\'sort-order-hashes\').value=\'\';" value="Reset custom ordering" />' . "\n";
@@ -578,4 +577,4 @@ if ( !CUSTOM_TAGS ) {
 	$allowedtags['span'] = array(
 			'style' => array());
 }
- ?>
+?>

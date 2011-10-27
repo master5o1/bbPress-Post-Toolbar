@@ -17,8 +17,8 @@ class bbp_5o1_smilies_panel {
 		if ( file_exists(WP_CONTENT_DIR . '/smilies/package-config.php') )
 			return content_url( '/smilies/' . $img );
 		elseif ( file_exists(dirname(__FILE__) . '/smilies/package-config.php') )
-			return plugins_url( '/smilies/' . $img, __FILE__ ); 
-		return $link;	
+			return plugins_url( '/smilies/' . $img, __FILE__ );
+		return $link;
 	}
 
 	function panel_entry($items) {
@@ -36,7 +36,7 @@ class bbp_5o1_smilies_panel {
 			$items[] = $item;
 		}
 		return $items;
-	}	
+	}
 }
 
 ?>
