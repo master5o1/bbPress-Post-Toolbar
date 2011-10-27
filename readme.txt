@@ -61,31 +61,29 @@ I recommend that this folder is either copied or moved to the `/wp-content/` dir
 
 == Screenshots ==
 
-1. The toolbar, showing Bold tag is open.
-1. The YouTube panel opened.
-1. Image panel part of the toolbar options.
+1. Code box showing an example of how to post the code box.
+1. Online Video panel opened.
+1. Toolbar options showing the Drag 'n Drop button ordering.
 
 == Changelog ==
 
 = 0.7.1 =
-
 * Allowed for duplicate smiley codes but not so that each duplicate code has its own entry on the panel. [feature request](http://master5o1.com/topic/id-like-to-submit-a-feature/)
 * Example: :) and (: both translate to smile.png but smile.png only has one entry on the toolbar smilies panel.
 * Fixed minor bug in video panel where 'Online Video Url::' had two colons.
+* Removed :'( from the smilies translation package and added :cry: ;( ;-( etc as replacement.
+* Replaced the screenshots with newer ones.
 
 = 0.7.0 =
-
 * Made images be anchored to their image file also.  As requested in [this topic](http://master5o1.com/topic/image-hyperlinks/) on my forum.
 * Built custom CSS ability.  Uses the default toolbar.css if there is not custom CSS available.  Custom CSS replaces toolbar.css and is run before the default/extended button css.
 * Custom button ordering.  Drag and drop using jQuery's Sortable.
 
 = 0.6.1 =
-
 * Fixed the 5MB issue in toolbar-images-panel.php.  It now uses your site's PHP settings to determine your max upload filesize.
 * Something else, but I've forgotten because I did it a week ago and didn't write it down.  Main reason for releasing this update is so that the fix above is applied and released to all before I go skiing for a week.
 
 = 0.6.0 =
-
 * Adjusted the toolbar HTML and CSS to fix it so that if the buttons are too wide for the toolbar, the overflow into a second layor still looks nice.
 * LiveLeak video support; Also RedTube but that's not listed on the video panel because it's pr0ns.
 * Added a [code][/code] shortcode (Turned off).  Tempted to hook it into the <code></code> html tag.  It displays line numbers and holds true with indentation.
@@ -105,24 +103,20 @@ I recommend that this folder is either copied or moved to the `/wp-content/` dir
 * Minor adjustments to `toolbar.css`
 
 = 0.5.8 =
-
 * Wow, my testing sux, obviously.  Oh well.
 * Fixed a bug where the image was being uploaded to ./2011/08imagename.jpg instead of ./2011/08/imagename.jpg.
 * Also made the unique filename be a counter of how many occurances of that filename is in the folder: image.jpg exists so named image-1.jpg, image-2.jpg, etc.  Much like WP does usually for it's stuff.
 * Cudos to mvaginger for [bringing this bug to my attention](http://wordpress.org/support/topic/i-am-sorry-but-still-buggy).
 
 = 0.5.7 =
-
 * Reverted back to option-checks rather than included 'child' plugins.
 * Minor restyle of the options page.
 
 = 0.5.6 =
-
 * When going to the options page for the first time, the default set of toolbar items will be activated.
 * Activated items are: Toolbar Formatting, Toolbar Smilies Panel, Toolbar Video Panel.
 
 = 0.5.5 =
-
 * Extracted the buttons and panels into four sub-plugins: video, smilies, formatting & images.
 * Above allowed for ordering of the buttons (by those categories); default ordering is formatting, images, video, smilies.
 * Added [video][/video] shortcode to replace the [youtube] one.  This is because I added more providers.
@@ -130,54 +124,44 @@ I recommend that this folder is either copied or moved to the `/wp-content/` dir
 * Removed the allow images option because it is implied when the images sub-plugin is activated.
 
 = 0.5.1 =
-
 * Allowed image uploading to be optional, that is, while posting images is still allowable, uploading them is not.
 * Got around to enqueing the style and scripts (fileuploader.css/.js & toolbar.css/.js).
 * Fixed various URLs and directory paths to use WP's functions or constants (ie: content_url(), site_url(), plugins_url(), WP_CONTENT_DIR, etc).
 
 = 0.5.0 =
-
 * Added image uploading using Valums' [Ajax Upload](http://valums.com/ajax-upload/) script.
 * Image uploading is turned on when allowing image posting is turned on.
 * Anonymous (unregistered users) can upload images if allowed in the settings (off by default).
 
 = 0.4.0 =
-
 * Allowing the insertion of the bar set to manual, use `<?php do_action('bbp_post_toolbar_insertion'); ?>` in your theme file where ever you want the bar to appear.
 * Allowed the Help panel to be customised.
 
 = 0.3.3 =
-
 * Programmatically determined what the plugin version is so that I can't forget to update the version in the About panel, etc.
 
 = 0.3.2 =
-
 * Added `/languages/bbpress-post-toolbar.pot` file to the plugin for translations to be done.
 * Adding __() and _e() to allow for translations.
 * Haha, turns out I forgot the version info in about plugin again. -_-
 
 = 0.3.1 =
-
 * Changing the plugin header to try and get the Active Versions pie 
 chart working.
 
 = 0.3.0 =
-
 * Reorganised the plugin options page and added some notes about each option.  Suggestion to move `/smilies/`, etc.
 * Allowed the option to have the master5o1 credit be linked back to my website.  Default = not linked.
 * Made smilies directory preference be `wp-content/smilies/`, then fall back to `wp-content/plugins/bbpress-post-toolbar/smilies/`, then fall back to WordPress' default set.
 
 = 0.2.1 =
-
 * Accidentally forgot to increase the version that was displayed in the About panel on the toolbar.
 
 = 0.2.0 =
-
 * Add Button API is actually usable now.
 * Allowed custom javascript functions to be run through the Add Button api so that adding a button is actually doable.
 
 = 0.1.0 =
-
 * First release.
 
 == Upgrade Notice ==
@@ -231,9 +215,9 @@ add_filter( 'bbp_5o1_toolbar_add_items' , 'bbp_5o1_spoiler_add_to_toolbar' );`
 Really, just look inside toolbar.js
 
 * Insert an HTML tag: `insert_data('tag')`
-	* (returns <tag></tag>, potentially wrapped around text)
+* (returns <tag></tag>, potentially wrapped around text)
 * Insert a shortcode tag: `insert_shortcode('tag')`
-	* (returns [tag][/tag], potentially wrapped around text)
+* (returns [tag][/tag], potentially wrapped around text)
 * Insert a smiley: `insert_smiley(':)')`
 * Insert a color: `insert_color('red')`
 * Insert a size: `insert_size('5pt')`
