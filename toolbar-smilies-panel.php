@@ -30,7 +30,7 @@ class bbp_5o1_smilies_panel {
 			// Allow duplicate codes to be parsed but not have buttons for those duplicates.
 			$smilies_array = array_flip($wpsmiliestrans);
 			foreach ($smilies_array as $name => $code) {
-				$js = "insert_smiley('${code}');";
+				$js = "insert_smiley('" . addslashes($code) . "');";
 				$item['data'] .= '<a class="smiley" onclick="' . $js . '">' . str_replace("class='wp-smiley' ", 'title="' . $code . '" ', convert_smilies($code)) . '</a>';
 			}
 			$items[] = $item;
