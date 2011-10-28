@@ -116,6 +116,11 @@ function insert_panel(tag) {
 		link = '[video]' + video_url.value + '[/video]';
 		post_form.value += link;
 		video_url.value = "";
+	} else if (tag == 'paste') {
+		paste_url = document.getElementById('paste_url');
+		link = '[paste]' + paste_url.value + '[/paste]';
+		post_form.value += link;
+		paste_url.value = "";
 	}
 	document.getElementById(toolbar_active_panel).style.display='none';
 	toolbar_active_panel='';

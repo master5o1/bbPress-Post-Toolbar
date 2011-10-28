@@ -18,6 +18,7 @@ Post toolbar for bbPress 2.0.
 * Allows &lt;span style=""&gt; in a bbPress posts.
 * Embeds online videos from multiple providers (Dailymotion, LiveLeak, Megavideo, Metacafe, Vimeo, YouTube,) using [video]http://...[video]
 * Also provides a [youtube]http://...[/youtube] shortcode.
+* Embeds online pastebins from multiple providers (GitHub's Gist, Pastebin.com) using [paste]http://...[/paste]
 * Toolbar items all pluggable, defaults can be turned off and replaced by custom ones.
 * Default item set is formatting, smilies, and videos.
 * Custom CSS styling of the bar.
@@ -73,6 +74,7 @@ I recommend that this folder is either copied or moved to the `/wp-content/` dir
 * Fixed minor bug in video panel where 'Online Video Url::' had two colons.
 * Removed :'( from the smilies translation package and added :cry: ;( ;-( etc as replacement.
 * Replaced the screenshots with newer ones.
+* Created toolbar-pastebin-panel.php to handle the [paste][/paste] shortcode.  Starting with GitHub's Gist and Pastebin.com.
 
 = 0.7.0 =
 * Made images be anchored to their image file also.  As requested in [this topic](http://master5o1.com/topic/image-hyperlinks/) on my forum.

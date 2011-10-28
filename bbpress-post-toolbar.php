@@ -73,6 +73,8 @@ if ( get_option( 'bbp_5o1_toolbar_use_smilies' ) )
 	require_once( dirname(__FILE__) . '/toolbar-smilies-panel.php' );
 if ( get_option( 'bbp_5o1_toolbar_use_images' ) )
 	require_once( dirname(__FILE__) . '/toolbar-images-panel.php' );
+if ( get_option( 'bbp_5o1_toolbar_use_pastebin' ) )
+	require_once( dirname(__FILE__) . '/toolbar-pastebin-panel.php' );
 
 // Plugin Activation/Deactivation Hooks:
 register_activation_hook(__FILE__, array('bbp_5o1_toolbar', 'plugin_activation') );
@@ -101,6 +103,7 @@ class bbp_5o1_toolbar {
 		add_option( 'bbp_5o1_toolbar_use_formatting', true, '', 'yes' );
 		add_option( 'bbp_5o1_toolbar_use_smilies', true, '', 'yes' );
 		add_option( 'bbp_5o1_toolbar_use_images', false, '', 'yes' );
+		add_option( 'bbp_5o1_toolbar_use_pastebin', false, '', 'yes' );
 
 		add_option( 'bbp_5o1_toolbar_use_custom_smilies', false, '', 'yes' );
 		add_option( 'bbp_5o1_toolbar_use_textalign', false, '', 'yes' );
@@ -116,6 +119,7 @@ class bbp_5o1_toolbar {
 		delete_option( 'bbp_5o1_toolbar_use_formatting' );
 		delete_option( 'bbp_5o1_toolbar_use_smilies' );
 		delete_option( 'bbp_5o1_toolbar_use_images' );
+		delete_option( 'bbp_5o1_toolbar_use_pastebin' );
 
 		delete_option( 'bbp_5o1_toolbar_use_custom_smilies' );
 		delete_option( 'bbp_5o1_toolbar_use_textalign' );
@@ -152,6 +156,9 @@ class bbp_5o1_toolbar {
 		$use_images = false;
 		if ( get_option( 'bbp_5o1_toolbar_use_images' ) )
 			$use_images = true;
+		$use_pastebin = false;
+		if ( get_option( 'bbp_5o1_toolbar_use_pastebin' ) )
+			$use_pastebin = true;
 
 		$custom_smilies = false;
 		if ( get_option('bbp_5o1_toolbar_use_custom_smilies') )
@@ -190,6 +197,14 @@ class bbp_5o1_toolbar {
 						</span>
 					</p>
 					<p>
+						<strong><?php _e('Show pastebin panel?', 'bbp_5o1_toolbar'); ?></strong><br /><br />
+						<span style="margin: 0 50px;">
+							<label style="display: inline-block; width: 150px;"><input name="bbp_5o1_toolbar_use_pastebin" type="radio" value="1" <?php print (($use_pastebin) ? 'checked="checked"' : '' ) ?> /> <?php _e('Yes', 'bbp_5o1_toolbar'); ?></label>
+							<label><input name="bbp_5o1_toolbar_use_pastebin" type="radio" value="0" <?php print ((!$use_pastebin) ?
+	'checked="checked"' : '' ) ?> /> <?php _e('No (default)', 'bbp_5o1_toolbar'); ?></label>
+						</span>
+					</p>
+					<p>
 						<strong><?php _e('Show smilies panel?', 'bbp_5o1_toolbar'); ?></strong><br /><br />
 						<span style="margin: 0 50px;">
 						<label style="display: inline-block; width: 150px;"><input name="bbp_5o1_toolbar_use_smilies" type="radio" value="1" <?php print (($use_smilies) ? 'checked="checked"' : '' ) ?> /> <?php _e('Yes (default)', 'bbp_5o1_toolbar'); ?></label>
@@ -219,7 +234,7 @@ class bbp_5o1_toolbar {
 					<?php if ( $use_formatting ) : ?>
 					<div style="margin: 0 0 10px 51px; padding: 0 10px 10px 10px; border: solid 10px #eee; border-top: solid 1px #eee; border-right: solid 1px #eee;">
 						<p>
-							<strong><?php _e('Allow text-alignment buttons?', 'bbp_5o1_toolbar'); ?></strong><br /><br />
+							<strong><?php _e('Show text-alignment buttons?', 'bbp_5o1_toolbar'); ?></strong><br /><br />
 							<span style="margin: 0 50px;">
 							<label style="display: inline-block; width: 150px;"><input name="bbp_5o1_toolbar_use_textalign" type="radio" value="1" <?php print (($textalign) ? 'checked="checked"' : '' ) ?> /> <?php _e('Yes', 'bbp_5o1_toolbar'); ?></label>
 							<label><input name="bbp_5o1_toolbar_use_textalign" type="radio" value="0" <?php print ((!$textalign) ?
@@ -334,6 +349,12 @@ class bbp_5o1_toolbar {
 				update_option('bbp_5o1_toolbar_use_smilies', true);
 			elseif ($_POST['bbp_5o1_toolbar_use_smilies'] == 0)
 				update_option('bbp_5o1_toolbar_use_smilies', false);
+
+			if ($_POST['bbp_5o1_toolbar_use_pastebin'] == 1)
+				update_option('bbp_5o1_toolbar_use_pastebin', true);
+			elseif ($_POST['bbp_5o1_toolbar_use_pastebin'] == 0)
+				update_option('bbp_5o1_toolbar_use_pastebin', false);
+
 
 			if ($_POST['bbp_5o1_toolbar_use_beta'] == 1)
 				update_option('bbp_5o1_toolbar_use_beta', true);
