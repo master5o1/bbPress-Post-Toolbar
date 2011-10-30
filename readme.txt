@@ -24,9 +24,12 @@ Post toolbar for bbPress 2.0.
 * Custom CSS styling of the bar.
 * Custom button ordering.
 
-I would like to use my [website](http://master5o1.com/) for more direct 
-support, feedback, bug reports and feature requests.  Any donations will 
-be gratefully accepted. ;)
+An example of the toolbar is on the [forum](http://master5o1.com/contact/) on my website.
+
+I would prefer it if support and feedback is placed on my [forum](http://master5o1.com/forum/wordpress-plugins/bbpress-post-toolbar/) because I'll check my website more often than WordPress' plugin forums.
+I have a GitHub repository for this project [here](https://github.com/master5o1/bbPress-Post-Toolbar).
+Bug reports, feature requests and other issues can be reported through the GitHub (Issues system)[https://github.com/master5o1/bbPress-Post-Toolbar/issues].
+Any [donations](http://master5o1.com/donate/) will be gratefully accepted. ;)
 
 == Installation ==
 
