@@ -57,7 +57,7 @@ class bbp_5o1_toolbar_format {
 		} else {
 			$s = '<div class="code-main">'
 			.	'<div class="code-title">'
-			.	'<span>&nbsp;<strong>Code:</strong> '.$title.' </span><span style="float: right;">(<a class="noselect" onclick="fnSelect(\'' . $id . '\');">select</a>)&nbsp;</span>'
+			.	'<span>&nbsp;<strong>Code:</strong> '.$title.' </span><span class="noselect" style="float: right;">(<a onclick="fnSelect(\'' . $id . '\');">select</a>)&nbsp;</span>'
 			.	'</div>'
 			.	(($numbered == true)?'<div class="code-num" id="' . $numid . '">' . $numbers . '<br /><br /></div>':'')
 			.	'<div class="code-content"' . (($numbered == true)?' style="border-left: solid 1px #e5e5e5;" onscroll="'.$js.'"':'') . ' id="' . $id . '">' . $content . '<br /><br /></div>'
@@ -80,7 +80,7 @@ class bbp_5o1_toolbar_format {
 	function code_style() {
 		return <<<STYLE
 div.code-main .noselect { cursor: pointer; -webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-o-user-select: none; user-select: none; }
-span.code-inline { background-color: #f5f5f5; font-family: monospace; white-space: nowrap; padding: 2px 3px; }
+span.code-inline { background-color: #f5f5f5; font-family: monospace; font-size: 0.9em; white-space: pre-wrap; padding: 2px 3px; }
 div.code-main {
 	font-size: 0.9em;
 	-webkit-border-radius: 3px;-khtml-border-radius: 3px;-moz-border-radius: 3px;-o-border-radius: 3px; border-radius: 3px;
