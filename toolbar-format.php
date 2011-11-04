@@ -60,7 +60,7 @@ class bbp_5o1_toolbar_format {
 			.	'<span>&nbsp;<strong>Code:</strong> '.$title.' </span><span class="noselect" style="float: right;">(<a onclick="fnSelect(\'' . $id . '\');">select</a>)&nbsp;</span>'
 			.	'</div>'
 			.	(($numbered == true)?'<div class="code-num" id="' . $numid . '">' . $numbers . '<br /><br /></div>':'')
-			.	'<div class="code-content"' . (($numbered == true)?' style="border-left: solid 1px #e5e5e5;" onscroll="'.$js.'"':'') . ' id="' . $id . '">' . $content . '<br /><br /></div>'
+			.	'<div class="code-content"' . (($numbered == true)?' style="border-left: solid 1px #e5e5e5;" onscroll="'.$js.'"':'') . ' id="' . $id . '">' . $content . (($numbered == true)?'<br /><br />':'') . '</div>'
 			.	'<div style="clear:both;"></div></div>';
 			return $s;
 		}
