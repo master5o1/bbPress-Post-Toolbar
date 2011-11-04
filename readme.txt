@@ -4,7 +4,7 @@ Donate link: http://master5o1.com/donate/
 Tags: bbPress, bbPress 2.0, toolbar, youtube, images, smilies, smileys, emoticons, 5o1
 Requires at least: WordPress 3.1+ and bbPress 2.0+
 Tested up to: 3.2.1
-Stable tag: 0.7.0
+Stable tag: 0.7.5
 
 Post toolbar for bbPress 2.0.
 
@@ -71,7 +71,7 @@ I recommend that this folder is either copied or moved to the `/wp-content/` dir
 
 == Changelog ==
 
-= 0.7.1 =
+= 0.7.5 =
 * Allowed for duplicate smiley codes but not so that each duplicate code has its own entry on the panel. [feature request](http://master5o1.com/topic/id-like-to-submit-a-feature/)
 * Example: :) and (: both translate to smile.png but smile.png only has one entry on the toolbar smilies panel.
 * Fixed minor bug in video panel where 'Online Video Url::' had two colons.
