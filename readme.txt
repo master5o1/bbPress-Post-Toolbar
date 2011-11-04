@@ -78,6 +78,8 @@ I recommend that this folder is either copied or moved to the `/wp-content/` dir
 * Removed :'( from the smilies translation package and added :cry: ;( ;-( etc as replacement.
 * Replaced the screenshots with newer ones.
 * Created toolbar-pastebin-panel.php to handle the [paste][/paste] shortcode.  Starting with GitHub's Gist and Pastebin.com.
+* Adjusted the [code] design so that it works better in all browsers.
+* Prevented the bar from being displayed if the web browser is MSIE and less than version 8.0.
 
 = 0.7.0 =
 * Made images be anchored to their image file also.  As requested in [this topic](http://master5o1.com/topic/image-hyperlinks/) on my forum.
