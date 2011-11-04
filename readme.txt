@@ -28,7 +28,7 @@ An example of the toolbar is on the [forum](http://master5o1.com/contact/) on my
 
 I would prefer it if support and feedback is placed on my [forum](http://master5o1.com/forum/wordpress-plugins/bbpress-post-toolbar/) because I'll check my website more often than WordPress' plugin forums.
 I have a GitHub repository for this project [here](https://github.com/master5o1/bbPress-Post-Toolbar).
-Bug reports, feature requests and other issues can be reported through the GitHub (Issues system)[https://github.com/master5o1/bbPress-Post-Toolbar/issues].
+Bug reports, feature requests and other issues can be reported through the GitHub [Issues system](https://github.com/master5o1/bbPress-Post-Toolbar/issues).
 Any [donations](http://master5o1.com/donate/) will be gratefully accepted. ;)
 
 == Installation ==
@@ -202,9 +202,9 @@ Added translation .pot file so that people can have custom translations.
 The following is about standard push buttons, not panel opening buttons.  To see how a panel opening button works just view the bbpress-post-toolbar.php source.
 
 Adding custom buttons to the toolbar is done using by making a plugin and adding a filter to hook into the button.
-My example below is how I added the Spoiler button to the toolbar, which is my modification of the [Tiny Spoiler](http://wordpress.org/extend/plugins/tiny-spoiler/) plugin.
+My example below is how I added the Spoiler button to the toolbar, which is [my modification](https://github.com/master5o1/wordpress-tiny-spoiler) of the [Tiny Spoiler](http://wordpress.org/extend/plugins/tiny-spoiler/) plugin.
 
-Note: This isn't my only modification to Tiny Spoiler.  I had to get also build a function to parse the `[spoiler]` shortcode inside a bbPress post.
+Note: This isn't my only modification to Tiny Spoiler.  I had to also build a function to parse the `[spoiler]` shortcode inside a bbPress post.
 
 `function bbp_5o1_spoiler_add_to_toolbar($items) {
 	$javascript = <<<JS
