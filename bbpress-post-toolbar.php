@@ -405,6 +405,16 @@ class bbp_5o1_toolbar {
 
 	function post_form_toolbar_bar($param = null) {
 		global $wpsmiliestrans;
+
+		// Let's not output the bar if the browser is MSIE 7 or older.
+		$agent = explode(' ', $_SERVER['HTTP_USER_AGENT']);
+		$browser = $agent[2];
+		$version = str_replace(';',' ',$agent[3]);
+		if ($browser == 'MSIE' && intval($version,10) < 8 && intval($version,10) != 0) {
+			echo '<div class="bbp-template-notice warning">bbPress Post Toolbar does not support your browser version.</div>';
+			return $param;
+		}
+
 		$items = apply_filters( 'bbp_5o1_toolbar_add_items' , array() );
 		if (count($items) == 0) {
 			$items[] = array( 'action' => 'switch_panel',

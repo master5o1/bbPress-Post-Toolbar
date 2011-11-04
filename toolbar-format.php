@@ -82,6 +82,7 @@ class bbp_5o1_toolbar_format {
 div.code-main .noselect { cursor: pointer; -webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-o-user-select: none; user-select: none; }
 span.code-inline { background-color: #f5f5f5; font-family: monospace; white-space: nowrap; padding: 2px 3px; }
 div.code-main {
+	font-size: 0.8em;
 	-webkit-border-radius: 3px;-khtml-border-radius: 3px;-moz-border-radius: 3px;-o-border-radius: 3px; border-radius: 3px;
 	border: solid 1px #e5e5e5;
 	padding: 0; margin: 1em;
