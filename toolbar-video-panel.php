@@ -125,8 +125,8 @@ HTML;
 			}
 		}
 		if ( is_ssl() )
-			return bbp_5o1_video_panel::embed_iframe( "http://www.youtube.com/embed/${video_code['v']}", $atts );
-		return bbp_5o1_video_panel::embed_iframe( "https://www.youtube.com/embed/${video_code['v']}", $atts );
+			return bbp_5o1_video_panel::embed_iframe( "https://www.youtube.com/embed/${video_code['v']}", $atts );
+		return bbp_5o1_video_panel::embed_iframe( "http://www.youtube.com/embed/${video_code['v']}", $atts );
 
 	}
 
